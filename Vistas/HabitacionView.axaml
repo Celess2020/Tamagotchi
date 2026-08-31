@@ -1,0 +1,42 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controles="using:Tamagotchi.Controles"
+             x:Class="Tamagotchi.Vistas.HabitacionView"
+             Width="1280" Height="720">
+    <Canvas Width="1280" Height="720">
+
+        <!-- Fondo de día/noche: DETRÁS de la habitación -->
+        <Image x:Name="FondoDia" Source="avares://Tamagotchi/Assets/Escenario/HabitacionFondoDia.png"
+               Width="1280" Height="720" Canvas.Left="0" Canvas.Top="0" />
+        <Image x:Name="FondoNoche" Source="avares://Tamagotchi/Assets/Escenario/HabitacionFondoNoche.png"
+               Width="1280" Height="720" Canvas.Left="0" Canvas.Top="0" IsVisible="False" />
+
+        <!-- La habitación en sí. Un clic en cualquier parte vacía cambia día/noche -->
+        <Image x:Name="ImagenHabitacion" Source="avares://Tamagotchi/Assets/Escenario/Habitacion.png"
+               Width="1280" Height="720" Canvas.Left="0" Canvas.Top="0"
+               Cursor="Hand" PointerPressed="Fondo_PointerPressed" />
+
+        <!-- El pingüino -->
+        <controles:MascotaView x:Name="Mascota" Canvas.Left="100" Canvas.Top="280" />
+
+        <!-- Zonas interactivas (van arriba de todo para "tapar" el clic del fondo) -->
+        <Rectangle Canvas.Left="0" Canvas.Top="190" Width="330" Height="330"
+                   Fill="Transparent" Cursor="Hand"
+                   PointerPressed="Cama_PointerPressed" ToolTip.Tip="Dormir" />
+
+        <Rectangle Canvas.Left="395" Canvas.Top="440" Width="570" Height="260"
+                   Fill="Transparent" Cursor="Hand"
+                   PointerPressed="Juguetes_PointerPressed" ToolTip.Tip="Jugar con los juguetes" />
+
+        <Rectangle Canvas.Left="1015" Canvas.Top="205" Width="265" Height="210"
+                   Fill="Transparent" Cursor="Hand"
+                   PointerPressed="PC_PointerPressed" ToolTip.Tip="Usar la PC" />
+
+        <Rectangle Canvas.Left="800" Canvas.Top="55" Width="165" Height="350"
+                   Fill="Transparent" Cursor="Hand"
+                   PointerPressed="Puerta_PointerPressed" ToolTip.Tip="Ir al mapa" />
+
+        <controles:PanelEstadisticas Canvas.Left="510" Canvas.Top="10" />
+
+    </Canvas>
+</UserControl>

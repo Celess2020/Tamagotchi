@@ -1,0 +1,14 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Tamagotchi.Controles.MascotaView"
+             Width="400" Height="400"
+             IsHitTestVisible="False">
+    <Panel>
+        <Image x:Name="ImagenMascota" Stretch="Uniform" Width="400" Height="400" />
+
+        <!-- Tapa por completo al pingüino mientras cambia de etapa, así
+             no se ve el "salto" de un sprite a otro. Arranca oculta. -->
+        <Image x:Name="ImagenTransicion" Stretch="Uniform" Width="400" Height="400"
+               IsVisible="False" />
+    </Panel>
+</UserControl>

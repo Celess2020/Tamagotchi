@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Tamagotchi.Vistas.GameOverView"
+             Width="1280" Height="720">
+    <Canvas Width="1280" Height="720" Background="#1B1B2E">
+
+        <StackPanel Canvas.Left="0" Canvas.Top="230" Width="1280"
+                    HorizontalAlignment="Center" Spacing="18">
+
+            <TextBlock Text="💔" FontSize="70" HorizontalAlignment="Center" />
+
+            <TextBlock Text="GAME OVER" Foreground="White" FontWeight="Bold"
+                       FontSize="56" HorizontalAlignment="Center" />
+
+            <TextBlock Text="Descuidaste demasiado tiempo a tu pingüino y no aguantó más."
+                       Foreground="#CCCCCC" FontSize="20" HorizontalAlignment="Center" />
+
+            <Button Content="🔄 Jugar de nuevo" Click="JugarDeNuevo_Click"
+                    HorizontalAlignment="Center" Margin="0,20,0,0"
+                    Padding="24,10" FontSize="18" />
+
+        </StackPanel>
+
+    </Canvas>
+</UserControl>

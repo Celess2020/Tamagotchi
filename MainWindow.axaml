@@ -1,0 +1,19 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Tamagotchi.MainWindow"
+        Title="Tamagotchi Pingüino"
+        Width="1100" Height="650"
+        MinWidth="640" MinHeight="360"
+        Background="Black">
+
+    <!--
+       El Viewbox se encarga de escalar ese "lienzo" para que entre 
+       en la ventana sin importar el tamaño que tenga, y sin deformar las imágenes.
+    -->
+    <Viewbox Stretch="Uniform">
+        <Grid Width="1280" Height="720" ClipToBounds="True">
+            <ContentControl x:Name="Contenido" />
+        </Grid>
+    </Viewbox>
+
+</Window>

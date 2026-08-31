@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Tamagotchi.Controles.PanelEstadisticas"
+             Width="260"
+             IsHitTestVisible="False">
+    <Border Background="#CC1B1B2E" CornerRadius="12" Padding="10,8">
+        <StackPanel Spacing="3">
+            <TextBlock x:Name="TextoEstado" Text="🙂 Normal"
+                       Foreground="White" FontWeight="Bold" FontSize="12"
+                       HorizontalAlignment="Center" Margin="0,0,0,3" />
+
+            <Grid ColumnDefinitions="22,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="🍗" FontSize="11" />
+                <ProgressBar x:Name="BarraHambre" Grid.Row="0" Grid.Column="1"
+                             Minimum="0" Maximum="100" Height="8" Margin="0,1"
+                             Foreground="#FF8C42" />
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="😴" FontSize="11" />
+                <ProgressBar x:Name="BarraEnergia" Grid.Row="1" Grid.Column="1"
+                             Minimum="0" Maximum="100" Height="8" Margin="0,1"
+                             Foreground="#4FC3F7" />
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="🛁" FontSize="11" />
+                <ProgressBar x:Name="BarraHigiene" Grid.Row="2" Grid.Column="1"
+                             Minimum="0" Maximum="100" Height="8" Margin="0,1"
+                             Foreground="#81C784" />
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="🎈" FontSize="11" />
+                <ProgressBar x:Name="BarraDiversion" Grid.Row="3" Grid.Column="1"
+                             Minimum="0" Maximum="100" Height="8" Margin="0,1"
+                             Foreground="#BA68C8" />
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="🚽" FontSize="11" />
+                <ProgressBar x:Name="BarraVejiga" Grid.Row="4" Grid.Column="1"
+                             Minimum="0" Maximum="100" Height="8" Margin="0,1"
+                             Foreground="#E57373" />
+            </Grid>
+        </StackPanel>
+    </Border>
+</UserControl>

@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controles="using:Tamagotchi.Controles"
+             x:Class="Tamagotchi.Vistas.ParqueView"
+             Width="1280" Height="720">
+    <Canvas Width="1280" Height="720">
+
+        <Image Source="avares://Tamagotchi/Assets/Escenario/Parque.png"
+               Width="1280" Height="720" Canvas.Left="0" Canvas.Top="0" />
+
+        <controles:MascotaView x:Name="Mascota" Canvas.Left="520" Canvas.Top="290" />
+
+        <Rectangle Canvas.Left="760" Canvas.Top="350" Width="470" Height="210"
+                   Fill="Transparent" Cursor="Hand"
+                   PointerPressed="Arena_PointerPressed" ToolTip.Tip="Jugar en la arena" />
+
+        <!-- Dos matas de flores distintas, cada una posiciona a la mascota frente a sí misma -->
+        <Rectangle Canvas.Left="750" Canvas.Top="190" Width="380" Height="140"
+                   Fill="Transparent" Cursor="Hand"
+                   PointerPressed="Flores1_PointerPressed" ToolTip.Tip="Oler las flores" />
+        <Rectangle Canvas.Left="980" Canvas.Top="590" Width="200" Height="130"
+                   Fill="Transparent" Cursor="Hand"
+                   PointerPressed="Flores2_PointerPressed" ToolTip.Tip="Oler las flores" />
+
+        <!--
+            El parque, a diferencia de las otras habitaciones, no tiene una
+            puerta dibujada. Por eso agregamos un pequeño botón para volver
+            al mapa.
+        -->
+        <Button Canvas.Left="20" Canvas.Top="20" Content="🗺 Mapa"
+                Click="Mapa_Click" />
+
+        <controles:PanelEstadisticas Canvas.Left="510" Canvas.Top="10" />
+
+    </Canvas>
+</UserControl>
