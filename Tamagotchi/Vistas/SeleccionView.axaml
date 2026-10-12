@@ -1,0 +1,112 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Tamagotchi.ViewModels"
+             xmlns:srv="using:Tamagotchi.Servicios"
+             x:Class="Tamagotchi.Vistas.SeleccionView"
+             x:DataType="vm:SeleccionViewModel"
+             Width="1280" Height="720">
+
+    <!--
+        Esta pantalla usa MVVM: todo lo que se ve sale de SeleccionViewModel
+        con {Binding}, y los botones llaman a sus Commands. El .axaml.cs
+        queda prácticamente vacío.
+
+        ThemeVariantScope en Dark: así las listas y cuadros de texto se ven
+        claros sobre los paneles oscuros, aunque Windows esté en modo claro.
+    -->
+    <ThemeVariantScope RequestedThemeVariant="Dark">
+        <Canvas Width="1280" Height="720">
+
+            <Image Source="avares://Tamagotchi/Assets/Escenario/Inicio.png"
+                   Width="1280" Height="720" Canvas.Left="0" Canvas.Top="0" />
+
+            <!-- Oscurece un poco el fondo para que se lea bien todo -->
+            <Rectangle Width="1280" Height="720" Fill="#99000000" />
+
+            <TextBlock Canvas.Left="0" Canvas.Top="28" Width="1280"
+                       Text="¿Quién va a jugar?" TextAlignment="Center"
+                       Foreground="White" FontWeight="Bold" FontSize="40" />
+
+            <!-- ============ Panel de usuarios (izquierda) ============ -->
+            <Border Canvas.Left="70" Canvas.Top="105" Width="470" Height="560"
+                    Background="#E61B1B2E" CornerRadius="16" Padding="20">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="👤 Usuarios"
+                               Foreground="White" FontWeight="Bold" FontSize="24" Margin="0,0,0,10" />
+
+                    <StackPanel DockPanel.Dock="Bottom" Spacing="8" Margin="0,10,0,0">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBox Grid.Column="0" Text="{Binding NombreUsuarioNuevo, Mode=TwoWay}"
+                                     Watermark="Nombre de usuario nuevo" MaxLength="30" FontSize="16" />
+                            <Button Grid.Column="1" Content="➕ Crear" Margin="8,0,0,0" FontSize="16"
+                                    Command="{Binding CrearUsuarioCommand}" />
+                        </Grid>
+
+                        <Button Content="🗑 Borrar usuario" FontSize="14"
+                                Command="{Binding BorrarUsuarioCommand}" />
+
+                        <TextBlock Text="{Binding MensajeUsuarios}" Foreground="#FFE082"
+                                   TextWrapping="Wrap" FontSize="15" MinHeight="40" />
+                    </StackPanel>
+
+                    <!-- Vista de listado: los usuarios que vienen de la API -->
+                    <ListBox ItemsSource="{Binding Usuarios}"
+                             SelectedItem="{Binding UsuarioSeleccionado, Mode=TwoWay}"
+                             FontSize="18" CornerRadius="8" />
+                </DockPanel>
+            </Border>
+
+            <!-- ============ Panel de pingüinos (derecha) ============ -->
+            <Border Canvas.Left="570" Canvas.Top="105" Width="640" Height="560"
+                    Background="#E61B1B2E" CornerRadius="16" Padding="20">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="{Binding TituloPinguinos}"
+                               Foreground="White" FontWeight="Bold" FontSize="24" Margin="0,0,0,10" />
+
+                    <StackPanel DockPanel.Dock="Bottom" Spacing="8" Margin="0,10,0,0">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button Content="▶ Continuar" FontSize="18" Padding="20,8"
+                                    Command="{Binding ContinuarCommand}" />
+                            <Button Content="🗑 Borrar pingüino" FontSize="14"
+                                    Command="{Binding BorrarPinguinoCommand}" />
+                        </StackPanel>
+
+                        <!-- Formulario de alta: pingüino nuevo -->
+                        <Grid ColumnDefinitions="*,Auto" Margin="0,8,0,0"
+                              IsEnabled="{Binding HayUsuarioSeleccionado}">
+                            <TextBox Grid.Column="0" Text="{Binding NombrePinguinoNuevo, Mode=TwoWay}"
+                                     Watermark="Nombre del pingüino nuevo" MaxLength="20" FontSize="16" />
+                            <Button Grid.Column="1" Content="🥚 Nuevo pingüino" Margin="8,0,0,0" FontSize="16"
+                                    Command="{Binding CrearPinguinoCommand}" />
+                        </Grid>
+
+                        <TextBlock Text="{Binding MensajePinguinos}" Foreground="#FFE082"
+                                   TextWrapping="Wrap" FontSize="15" MinHeight="40" />
+                    </StackPanel>
+
+                    <!-- Vista de listado: las partidas guardadas del usuario -->
+                    <ListBox ItemsSource="{Binding Pinguinos}"
+                             SelectedItem="{Binding PinguinoSeleccionado, Mode=TwoWay}"
+                             CornerRadius="8">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate x:DataType="srv:PinguinoResumen">
+                                <StackPanel Spacing="2" Margin="0,4">
+                                    <StackPanel Orientation="Horizontal" Spacing="12">
+                                        <TextBlock Text="{Binding Nombre}" FontWeight="Bold" FontSize="20" />
+                                        <TextBlock Text="{Binding TextoEtapa}" FontSize="16"
+                                                   VerticalAlignment="Center" Foreground="#B3E5FC" />
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding TextoDetalle}" FontSize="13" Foreground="#BBBBBB" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </Border>
+
+            <Button Canvas.Left="20" Canvas.Top="20" Content="↩ Volver"
+                    Click="Volver_Click" />
+
+        </Canvas>
+    </ThemeVariantScope>
+</UserControl>

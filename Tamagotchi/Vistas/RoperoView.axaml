@@ -1,0 +1,97 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Tamagotchi.ViewModels"
+             x:Class="Tamagotchi.Vistas.RoperoView"
+             x:DataType="vm:RoperoViewModel"
+             Width="1280" Height="720">
+
+    <ThemeVariantScope RequestedThemeVariant="Dark">
+        <Canvas Width="1280" Height="720">
+
+            <!-- De fondo, la habitación (oscurecida) -->
+            <Image Source="avares://Tamagotchi/Assets/Escenario/HabitacionFondoDia.png"
+                   Width="1280" Height="720" Canvas.Left="0" Canvas.Top="0" />
+            <Image Source="avares://Tamagotchi/Assets/Escenario/Habitacion.png"
+                   Width="1280" Height="720" Canvas.Left="0" Canvas.Top="0" />
+            <Rectangle Width="1280" Height="720" Fill="#B3000000" />
+
+            <TextBlock Canvas.Left="40" Canvas.Top="24"
+                       Text="👕 Ropero"
+                       Foreground="White" FontWeight="Bold" FontSize="38" />
+
+            <!--
+                La rueda. Las porciones (una por ropa) se crean y se ubican
+                desde RoperoView.axaml.cs, porque su posición depende del
+                ángulo de giro y cambia en cada cuadro de la animación.
+            -->
+            <Canvas x:Name="Rueda" Canvas.Left="70" Canvas.Top="110"
+                    Width="560" Height="560" Background="Transparent"
+                    PointerWheelChanged="Rueda_PointerWheelChanged">
+
+                <!-- El aro de la rueda -->
+                <Ellipse Canvas.Left="20" Canvas.Top="20" Width="520" Height="520"
+                         Fill="#661B1B2E" Stroke="#FFE082" StrokeThickness="6" />
+
+                <!-- Los rayos: giran junto con la rueda (se dibujan desde el .cs) -->
+                <Canvas x:Name="Rayos" Width="560" Height="560"
+                        RenderTransformOrigin="50%,50%">
+                    <Canvas.RenderTransform>
+                        <RotateTransform Angle="0" />
+                    </Canvas.RenderTransform>
+                </Canvas>
+
+                <!-- Centro de la rueda -->
+                <Ellipse Canvas.Left="255" Canvas.Top="255" Width="50" Height="50"
+                         Fill="#FFE082" Stroke="#1B1B2E" StrokeThickness="4" />
+
+                <!-- Acá adentro van las porciones -->
+                <Canvas x:Name="Porciones" Width="560" Height="560" />
+            </Canvas>
+
+            <!-- La flechita que marca cuál queda elegida (la de arriba) -->
+            <TextBlock Canvas.Left="331" Canvas.Top="64" Text="▼"
+                       Foreground="#FF7043" FontSize="40" FontWeight="Bold" />
+
+            <!-- ============ Panel de la derecha ============ -->
+            <Border Canvas.Left="680" Canvas.Top="40" Width="540" Height="640"
+                    Background="#E61B1B2E" CornerRadius="16" Padding="20">
+                <StackPanel Spacing="10">
+
+                    <!-- Cómo queda el pingüino con la ropa elegida -->
+                    <Image Source="{Binding OpcionActual.Vista}"
+                           Width="300" Height="300" Stretch="Uniform"
+                           HorizontalAlignment="Center" />
+
+                    <TextBlock Text="{Binding OpcionActual.Nombre}"
+                               Foreground="White" FontWeight="Bold" FontSize="30"
+                               HorizontalAlignment="Center" />
+
+                    <TextBlock Text="{Binding OpcionActual.TextoBloqueo}"
+                               Foreground="#FFE082" FontSize="18"
+                               HorizontalAlignment="Center" />
+
+                    <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
+                        <Button Content="◀" FontSize="24" Padding="20,6"
+                                Command="{Binding AnteriorCommand}" ToolTip.Tip="Girar para atrás" />
+                        <Button Content="🎲" FontSize="24" Padding="20,6"
+                                Command="{Binding GirarAlAzarCommand}" ToolTip.Tip="Girar al azar" />
+                        <Button Content="▶" FontSize="24" Padding="20,6"
+                                Command="{Binding SiguienteCommand}" ToolTip.Tip="Girar para adelante" />
+                    </StackPanel>
+
+                    <Button Content="{Binding TextoBoton}" FontSize="22" Padding="30,10"
+                            HorizontalAlignment="Center"
+                            Command="{Binding PonerseCommand}" />
+
+                    <TextBlock Text="{Binding Mensaje}" Foreground="#B3E5FC" FontSize="15"
+                               TextWrapping="Wrap" TextAlignment="Center" MinHeight="40" />
+
+                    <Button Content="↩ Volver a la habitación" FontSize="16"
+                            HorizontalAlignment="Center"
+                            Command="{Binding VolverCommand}" />
+                </StackPanel>
+            </Border>
+
+        </Canvas>
+    </ThemeVariantScope>
+</UserControl>

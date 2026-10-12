@@ -1,0 +1,7 @@
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+# La base se crea sola al ejecutar la API
+TamagotchiApi/tamagotchi.db*

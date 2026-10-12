@@ -1,0 +1,37 @@
+@api = http://localhost:5080
+
+### Usuarios
+GET {{api}}/api/usuarios
+
+###
+POST {{api}}/api/usuarios
+Content-Type: application/json
+
+{ "nombre": "Celes" }
+
+###
+GET {{api}}/api/usuarios/1/pinguinos
+
+### Pingüinos
+POST {{api}}/api/pinguinos
+Content-Type: application/json
+
+{ "usuarioId": 1, "nombre": "Pingu" }
+
+###
+GET {{api}}/api/pinguinos/1
+
+###
+PUT {{api}}/api/pinguinos/1/ropa
+Content-Type: application/json
+
+{ "ropaId": 1 }
+
+###
+POST {{api}}/api/pinguinos/1/acciones
+Content-Type: application/json
+
+{ "accion": "Comer" }
+
+### Ropa
+GET {{api}}/api/ropas
